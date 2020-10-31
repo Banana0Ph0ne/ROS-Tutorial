@@ -2,5 +2,5 @@
 <node pkg="robot_localization" type="[*kf]_localization_node" name="[*kf]_localization" output="screen" >
 
     <!-- # Specify ROS params here -->
-    <param name="odom" value="/navi/scan"/>
+    <param name="odom" value="/scan"/>
 </node>
