@@ -32,7 +32,7 @@
             <!-- Odometry (nav_msgs/Odometry) settings -->
             <odometrySource>encoder</odometrySource>
             <odometryTopic>odom</odometryTopic>
-            <odometryFrame>odom</odometryFrame>
+            <odometryFrame>encoder/odom</odometryFrame>
 
             <!-- Robot frame to calculate odometry from -->
             <robotBaseFrame>base_link</robotBaseFrame>
