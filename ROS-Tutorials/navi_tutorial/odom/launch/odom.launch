@@ -1,6 +1,12 @@
-# [*kf] can be either "ekf" (Extended Kalman Filter) or "ukf" (Unscented Kalman Filter)
-<node pkg="robot_localization" type="[*kf]_localization_node" name="[*kf]_localization" output="screen" >
+<launch>
+    <arg name="robot_ns" default="navi"/>
+    <!--set the robot namespace-->
 
-    <!-- # Specify ROS params here -->
-    <param name="odom" value="/scan"/>
-</node>
+    <!--[*kf] can be either "ekf" (Extended Kalman Filter) or "ukf" (Unscented Kalman Filter)-->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization"  clear_params="true"  output="screen" >
+        <!--Outputs odom filtered topic^^^-->
+        <remap from="odometry/filtered" to="$(arg robot_ns)/odometry/local"/>
+        <rosparam command="load" file="$(find odom)/config/odom.yaml" subst_value="true"/>
+        <!--Loads config file ^^^ subst value needed for args to work-->
+    </node>
+</launch>
