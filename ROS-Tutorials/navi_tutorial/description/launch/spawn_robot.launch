@@ -1,6 +1,6 @@
 <launch>
 
-    <arg name="robot_ns" default="/"/>
+    <!-- <arg name="robot_ns" default="/"/> -->
 
     <!-- Spawn location -->
     <arg name="x"     default="0"/>
@@ -10,9 +10,8 @@
     <arg name="pitch" default="0"/>
     <arg name="yaw"   default="0"/>
 
-    <group ns="$(arg robot_ns)">
         <!-- TF Prefix: since "ns" does not affect TF tree -->
-        <param name="tf_prefix" value="$(arg robot_ns)"/>
+    
 
         <!-- Parse URDF with xacro -->
         <param name="robot_description" command="xacro '$(find description)/urdf/cybertruck.urdf.xacro'"/>
@@ -20,7 +19,7 @@
         <!-- Spawn Caffeine in Gazebo -->
         <node name="spawn_cybertruck" pkg="gazebo_ros" type="spawn_model"
             args="-param robot_description
-                -urdf -model $(arg robot_ns)_cybertruck
+                -urdf -model cybertruck
                 -x $(arg x) -y $(arg y) -z $(arg z)
                 -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)" />
 
@@ -30,12 +29,11 @@
     
     <!--Misc-->
     <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
-        <param name="default_topic" value="/$(arg robot_ns)/cmd_vel"/> 
+        <param name="default_topic" value="/cmd_vel"/> 
     </node>
 
     <include file="$(find description)/launch/view_robot.launch"/>
 
     
-    </group>
-
+    
 </launch>

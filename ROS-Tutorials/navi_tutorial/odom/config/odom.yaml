@@ -1,17 +1,17 @@
-frequency: 24 #depends on specs
+frequency: 30 #depends on specs
 two_d_mode: true #operates in 2d
 publish_tf: true #publishes frame
 
 debug: false #outputs LOTS of debug data if true
-map_frame: $(arg robot_ns)/map              # Defaults to "map" if unspecified
-odom_frame: $(arg robot_ns)/odom            # Defaults to "odom" if unspecified
-base_link_frame: $(arg robot_ns)/base_link  # Defaults to "base_link" if unspecified
-world_frame: $(arg robot_ns)/odom           # Defaults to the value of odom_frame if unspecified
+map_frame: map              # Defaults to "map" if unspecified
+odom_frame: odom            # Defaults to "odom" if unspecified
+base_link_frame: base_link  # Defaults to "base_link" if unspecified
+world_frame: odom           # Defaults to the value of odom_frame if unspecified
 
 
-odom0: $(arg robot_ns)/odom
+odom0: odom
 odom0_config: [true,true,false,
-              false,false,false,
+              false,false,true,
               true,true,false,
               false,false,true,
               false,false,false]
@@ -22,13 +22,14 @@ odom0_relative: false #if true, sets initial pount as 0 of reference frame
 
 # control / comments
 
-imu0: $(arg robot_ns)/imu/data
-imu0_config: [false,false,false,
-              false,false,true,
-              false,false,false,
-              false,false,true,
-              true,true,false]
-odom0_queue_size: 10 #seems to be some kind of buffer that depends on frequency, number of older messages to store, increase queue size if too jittery
-odom0_differential: false #if true, converts measurements into velocity before integrating
-odom0_relative: true #if true, sets initial pount as 0 of reference frame
-imu0_remove_gravitational_acceleration: true #depends on IMU model
+# imu0: imu/data
+# imu0_config: [false,false,false,
+#               false,false,true,
+#               false,false,false,
+#               false,false,true,
+#               true,true,false]
+# odom0_queue_size: 100 #seems to be some kind of buffer that depends on frequency, number of older messages to store, increase queue size if too jittery
+# odom0_differential: false #if true, converts measurements into velocity before integrating
+# odom0_relative: true #if true, sets initial pount as 0 of reference frame
+# imu0_remove_gravitational_acceleration: true #depends on IMU model
+
